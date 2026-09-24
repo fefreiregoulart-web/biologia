@@ -3,656 +3,746 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudo Interativo: Filo Chordata</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        bio: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            200: '#bbf7d0',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            800: '#166534',
-                            900: '#14532d',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <title>Estudo Definitivo: Filo Chordata e Vertebrados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #1b4332;
+            --primary-light: #2d6a4f;
+            --accent: #52b788;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #212529;
+            --text-muted: #6c757d;
+            --border: #dee2e6;
+            --shadow: rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
         body {
-            background-color: #f8fafc;
-            color: #0f172a;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 50px;
         }
 
-        /* Tech Pills for Technical Terms */
-        .tech-pill {
-            display: inline-block;
-            background-color: #e0f2fe;
-            color: #0369a1;
-            font-weight: 700;
-            padding: 0.15rem 0.5rem;
-            border-radius: 0.375rem;
-            border: 1px solid #bae6fd;
-            font-size: 0.875rem;
-            margin: 0.1rem;
-            white-space: normal;
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .tech-pill-alert {
-            background-color: #fef2f2;
-            color: #b91c1c;
-            border-color: #fecaca;
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* Smooth View Transitions */
-        .view-page {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-        .view-page.active {
-            display: block;
-            opacity: 1;
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 1.5rem auto;
         }
 
-        /* Modal Overlay */
-        .modal-backdrop {
-            background-color: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(5px);
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
-        /* Cards Hover Effects */
-        .hover-lift {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
         }
-        .hover-lift:hover {
+
+        .nav-btn.active, .nav-btn:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            background: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .breadcrumb-item {
+            color: var(--primary-light);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .breadcrumb-item:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            color: var(--text-muted);
+        }
+
+        .breadcrumb-current {
+            color: var(--text-muted);
+        }
+
+        /* Card / View Box */
+        .view-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px var(--shadow);
+            border: 1px solid var(--border);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--primary-light);
+            margin: 1.5rem 0 0.8rem 0;
+            font-size: 1.3rem;
+        }
+
+        p, ul {
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Grid de Opções / Sub-itens */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .option-card {
+            background: #fdfdfd;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .option-card:hover {
+            border-color: var(--accent);
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+
+        .option-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .option-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .btn-action {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background: var(--primary-light);
+        }
+
+        /* Modal Pop-up */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .modal-close:hover {
+            color: var(--text-main);
+        }
+
+        /* Destaques Técnicos e Exemplos */
+        .tech-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+        }
+
+        .examples-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Questionário de Treino */
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .quiz-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .quiz-question {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .answer-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f1f8f5;
+            border-radius: 8px;
+            border: 1px dashed var(--accent);
+            display: none;
+        }
+
+        .answer-box.revealed {
+            display: block;
+        }
+
+        .btn-reveal {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-reveal:hover {
+            background: #38a372;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col font-sans antialiased">
+<body>
 
-    <!-- Top Header -->
-    <header class="bg-gradient-to-r from-bio-900 to-bio-700 text-white shadow-lg sticky top-0 z-40">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-                <div class="bg-white/10 p-2.5 rounded-xl backdrop-blur-md">
-                    <i class="fa-solid fa-microscope text-2xl text-bio-200"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight">Módulo: Filo Chordata</h1>
-                    <p class="text-xs text-bio-200 font-medium">Anatomia, Fisiologia e Evolução (Foco em Vestibular/ENEM)</p>
-                </div>
-            </div>
-
-            <!-- Global Home Button -->
-            <button onclick="navigateTo('home')" class="self-start md:self-auto px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm font-semibold flex items-center gap-2 border border-white/20 transition-all hover-lift">
-                <i class="fa-solid fa-house"></i>
-                Início
-            </button>
+    <header>
+        <h1>Plataforma de Estudo: Filo Chordata</h1>
+        <p>Aprofundamento biológico e fisiológico para exames de alto desempenho</p>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchMainTab('study')">📚 Roteiro de Estudos</button>
+            <button class="nav-btn" onclick="switchMainTab('quiz')">✍️ Questões de Treino</button>
         </div>
-
-        <!-- Breadcrumb Navigation Bar -->
-        <nav aria-label="Breadcrumb" class="bg-bio-950 border-t border-bio-600/40 px-4 py-3 overflow-x-auto">
-            <div class="max-w-6xl mx-auto flex items-center gap-2 text-sm font-medium whitespace-nowrap" id="breadcrumb-container">
-                <!-- Dynamically Generated Breadcrumbs -->
-            </div>
-        </nav>
     </header>
 
-    <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-8">
+    <div class="container" id="study-section">
+        <div class="breadcrumbs" id="breadcrumbs"></div>
+        <div id="view-container"></div>
+    </div>
 
-        <!-- ================= VIEW: HOME (FILO CHORDATA) ================= -->
-        <section id="view-home" class="view-page active space-y-8">
-            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-                <span class="text-xs font-bold uppercase tracking-wider text-bio-600 bg-bio-50 px-3 py-1 rounded-full border border-bio-200">Visão Geral</span>
-                <h2 class="text-3xl font-extrabold text-slate-900 mt-3 mb-4">Filo Chordata</h2>
-                <p class="text-slate-600 leading-relaxed text-base md:text-lg">
-                    Todos os cordados compartilham obrigatoriamente 4 características embrionárias exclusivas (<span class="tech-pill">Sinapomorfias</span>). Elas podem desaparecer ou se modificar na fase adulta.
-                </p>
+    <div class="container" id="quiz-section" style="display: none;">
+        <h2>Questões Discursivas de Treino</h2>
+        <p>Responda mentalmente ou no papel e clique em "Ver Gabarito" para conferir a explicação teórica completa.</p>
+        <div class="quiz-container" id="quiz-list"></div>
+    </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl hover-lift">
-                        <div class="text-bio-600 mb-2 text-lg font-bold"><i class="fa-solid fa-bone mr-2"></i>1. Notocorda</div>
-                        <p class="text-sm text-slate-600">Bastão flexível de sustentação. Nos vertebrados, é substituída pela coluna vertebral.</p>
-                    </div>
-                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl hover-lift">
-                        <div class="text-sky-600 mb-2 text-lg font-bold"><i class="fa-solid fa-brain mr-2"></i>2. Tubo Neural Dorsal Oco</div>
-                        <p class="text-sm text-slate-600">Origina o Sistema Nervoso Central (encéfalo e medula espinhal).</p>
-                    </div>
-                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl hover-lift">
-                        <div class="text-amber-600 mb-2 text-lg font-bold"><i class="fa-solid fa-water mr-2"></i>3. Fendas Faríngeas</div>
-                        <p class="text-sm text-slate-600">Formam brânquias nos aquáticos. Em terrestres, formam estruturas do pescoço e ouvido interno.</p>
-                    </div>
-                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl hover-lift">
-                        <div class="text-indigo-600 mb-2 text-lg font-bold"><i class="fa-solid fa-arrow-turn-down mr-2"></i>4. Cauda Pós-anal</div>
-                        <p class="text-sm text-slate-600">Extensão muscular além do ânus. Ajuda na propulsão na água ou equilíbrio.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-sitemap text-bio-600"></i>Subfilos:</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <button onclick="openModal('urochordata')" class="bg-white p-6 rounded-xl border border-slate-200 hover:border-sky-300 shadow-sm hover-lift text-left group">
-                        <div class="flex items-center justify-between mb-3"><span class="p-3 bg-sky-50 text-sky-600 rounded-lg group-hover:bg-sky-600 group-hover:text-white transition-colors"><i class="fa-solid fa-anchor text-xl"></i></span><span class="text-xs font-semibold text-slate-400 bg-slate-100 px-2 py-1 rounded-full"><i class="fa-solid fa-expand mr-1"></i>Ler</span></div>
-                        <h4 class="text-lg font-bold text-slate-800 mb-1">Urochordata</h4>
-                        <p class="text-xs text-slate-500">Tunicados (Ascídias). Notocorda apenas na cauda da larva.</p>
-                    </button>
-                    <button onclick="openModal('cephalochordata')" class="bg-white p-6 rounded-xl border border-slate-200 hover:border-amber-300 shadow-sm hover-lift text-left group">
-                        <div class="flex items-center justify-between mb-3"><span class="p-3 bg-amber-50 text-amber-600 rounded-lg group-hover:bg-amber-600 group-hover:text-white transition-colors"><i class="fa-solid fa-fish text-xl"></i></span><span class="text-xs font-semibold text-slate-400 bg-slate-100 px-2 py-1 rounded-full"><i class="fa-solid fa-expand mr-1"></i>Ler</span></div>
-                        <h4 class="text-lg font-bold text-slate-800 mb-1">Cephalochordata</h4>
-                        <p class="text-xs text-slate-500">Anfioxo. Notocorda persiste no adulto até a cabeça.</p>
-                    </button>
-                    <button onclick="navigateTo('craniata')" class="bg-bio-600 p-6 rounded-xl border border-bio-700 shadow-md hover:bg-bio-700 hover-lift text-left text-white group">
-                        <div class="flex items-center justify-between mb-3"><span class="p-3 bg-white/10 rounded-lg"><i class="fa-solid fa-skull text-xl"></i></span><span class="text-xs font-semibold bg-white/20 px-2 py-1 rounded-full">Avançar <i class="fa-solid fa-arrow-right"></i></span></div>
-                        <h4 class="text-xl font-bold mb-1">Craniata (Vertebrados)</h4>
-                        <p class="text-xs text-bio-100">Com crânio e, na maioria, coluna vertebral.</p>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= VIEW: SUBFILO CRANIATA ================= -->
-        <section id="view-craniata" class="view-page space-y-8">
-            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-                <span class="text-xs font-bold uppercase tracking-wider text-bio-600 bg-bio-50 px-3 py-1 rounded-full border border-bio-200">Subfilo</span>
-                <h2 class="text-3xl font-extrabold text-slate-900 mt-3 mb-2">Craniata (Vertebrata)</h2>
-                <p class="text-slate-600">Possuem <span class="tech-pill">Crânio</span> protegendo o encéfalo. A divisão primária deste grupo ocorreu com o surgimento da mandíbula.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-network-wired text-bio-600"></i>Divisão:</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <button onclick="openModal('agnatha')" class="bg-white p-6 rounded-xl border border-slate-200 hover:border-purple-300 shadow-sm hover-lift text-left group">
-                        <div class="flex items-center justify-between mb-3"><span class="p-3 bg-purple-50 text-purple-600 rounded-lg group-hover:bg-purple-600 group-hover:text-white transition-colors"><i class="fa-solid fa-circle-notch text-xl"></i></span><span class="text-xs font-semibold text-slate-400 bg-slate-100 px-2 py-1 rounded-full"><i class="fa-solid fa-expand mr-1"></i>Ler</span></div>
-                        <h4 class="text-lg font-bold text-slate-800 mb-1">Agnatha</h4>
-                        <p class="text-xs text-slate-500">Agnatos (sem mandíbula). Ex: Lampreias e Feiticeiras.</p>
-                    </button>
-                    <button onclick="navigateTo('gnathostomata')" class="bg-gradient-to-br from-bio-700 to-bio-800 p-6 rounded-xl shadow-md hover-lift text-left text-white group border border-bio-900">
-                        <div class="flex items-center justify-between mb-3"><span class="p-3 bg-white/10 rounded-lg"><i class="fa-solid fa-teeth-open text-xl"></i></span><span class="text-xs font-semibold bg-white/20 px-2 py-1 rounded-full">Avançar <i class="fa-solid fa-arrow-right"></i></span></div>
-                        <h4 class="text-xl font-bold mb-1">Gnathostomata</h4>
-                        <p class="text-xs text-bio-100">Vertebrados com mandíbula (predadores ativos).</p>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= VIEW: GNATHOSTOMATA ================= -->
-        <section id="view-gnathostomata" class="view-page space-y-8">
-            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-                <span class="text-xs font-bold uppercase tracking-wider text-bio-600 bg-bio-50 px-3 py-1 rounded-full border border-bio-200">Superclasse</span>
-                <h2 class="text-3xl font-extrabold text-slate-900 mt-3 mb-2">Gnathostomata</h2>
-                <p class="text-slate-600">A <span class="tech-pill">Mandíbula</span> permitiu a predação, revolucionando a diversidade animal.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-layer-group text-bio-600"></i>Classes / Agrupamentos:</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <button onclick="navigateTo('peixes')" class="bg-gradient-to-br from-sky-600 to-blue-700 p-6 rounded-xl border border-blue-800 shadow-md hover-lift text-left text-white group">
-                        <div class="flex items-center justify-between mb-3"><span class="p-3 bg-white/20 rounded-lg"><i class="fa-solid fa-fish-fins text-xl"></i></span><span class="text-xs font-semibold bg-white/20 px-2 py-1 rounded-full">Abrir Grupo <i class="fa-solid fa-arrow-right"></i></span></div>
-                        <h4 class="text-lg font-bold">Peixes</h4>
-                        <p class="text-xs text-blue-100 mt-1">Vertebrados aquáticos (Cartilaginosos e Ósseos).</p>
-                    </button>
-                    <button onclick="navigateTo('amphibia')" class="bg-white p-6 rounded-xl border border-slate-200 hover:border-emerald-500 shadow-sm hover-lift text-left group">
-                        <div class="flex items-center justify-between mb-3"><span class="p-3 bg-emerald-50 text-emerald-600 rounded-lg"><i class="fa-solid fa-frog text-xl"></i></span><i class="fa-solid fa-arrow-right text-slate-300 group-hover:text-emerald-500"></i></div>
-                        <h4 class="text-lg font-bold text-slate-800">Amphibia</h4><p class="text-xs text-slate-500 mt-1">Anfíbios</p>
-                    </button>
-                    <button onclick="navigateTo('reptilia')" class="bg-white p-6 rounded-xl border border-slate-200 hover:border-amber-500 shadow-sm hover-lift text-left group">
-                        <div class="flex items-center justify-between mb-3"><span class="p-3 bg-amber-50 text-amber-600 rounded-lg"><i class="fa-solid fa-staff-snake text-xl"></i></span><i class="fa-solid fa-arrow-right text-slate-300 group-hover:text-amber-500"></i></div>
-                        <h4 class="text-lg font-bold text-slate-800">Reptilia</h4><p class="text-xs text-slate-500 mt-1">Répteis</p>
-                    </button>
-                    <button onclick="navigateTo('aves')" class="bg-white p-6 rounded-xl border border-slate-200 hover:border-indigo-500 shadow-sm hover-lift text-left group">
-                        <div class="flex items-center justify-between mb-3"><span class="p-3 bg-indigo-50 text-indigo-600 rounded-lg"><i class="fa-solid fa-dove text-xl"></i></span><i class="fa-solid fa-arrow-right text-slate-300 group-hover:text-indigo-500"></i></div>
-                        <h4 class="text-lg font-bold text-slate-800">Aves</h4><p class="text-xs text-slate-500 mt-1">Aves voadoras e ratitas</p>
-                    </button>
-                    <button onclick="navigateTo('mammalia')" class="bg-white p-6 rounded-xl border border-slate-200 hover:border-rose-500 shadow-sm hover-lift text-left group">
-                        <div class="flex items-center justify-between mb-3"><span class="p-3 bg-rose-50 text-rose-600 rounded-lg"><i class="fa-solid fa-paw text-xl"></i></span><i class="fa-solid fa-arrow-right text-slate-300 group-hover:text-rose-500"></i></div>
-                        <h4 class="text-lg font-bold text-slate-800">Mammalia</h4><p class="text-xs text-slate-500 mt-1">Mamíferos</p>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= VIEW: PEIXES (PARENT) ================= -->
-        <section id="view-peixes" class="view-page space-y-8">
-            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Grupo Biológico</span>
-                <h2 class="text-3xl font-extrabold text-slate-900 mt-3 mb-2">Peixes</h2>
-                <p class="text-slate-600">Um grupo paraphyletico dividido essencialmente pela composição do esqueleto de seus membros.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <button onclick="navigateTo('chondrichthyes')" class="bg-white p-6 rounded-xl border border-slate-200 hover:border-sky-500 shadow-md hover-lift text-left group">
-                    <div class="flex items-center justify-between mb-3"><span class="p-3 bg-sky-50 text-sky-600 rounded-lg"><i class="fa-solid fa-fish text-xl"></i></span><i class="fa-solid fa-arrow-right text-slate-300 group-hover:text-sky-500"></i></div>
-                    <h4 class="text-lg font-bold text-slate-800">Chondrichthyes</h4>
-                    <p class="text-xs text-slate-500 mt-1">Condrictes (Esqueleto Cartilaginoso)</p>
-                </button>
-                <button onclick="navigateTo('osteichthyes')" class="bg-white p-6 rounded-xl border border-slate-200 hover:border-blue-500 shadow-md hover-lift text-left group">
-                    <div class="flex items-center justify-between mb-3"><span class="p-3 bg-blue-50 text-blue-600 rounded-lg"><i class="fa-solid fa-water-ladder text-xl"></i></span><i class="fa-solid fa-arrow-right text-slate-300 group-hover:text-blue-500"></i></div>
-                    <h4 class="text-lg font-bold text-slate-800">Osteichthyes</h4>
-                    <p class="text-xs text-slate-500 mt-1">Osteíctes (Esqueleto Ósseo)</p>
-                </button>
-            </div>
-        </section>
-
-        <!-- ================= VIEW: CHONDRICHTHYES ================= -->
-        <section id="view-chondrichthyes" class="view-page space-y-6">
-            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Chondrichthyes (Condrictes)</h2>
-                <p class="text-slate-600">Peixes com esqueleto totalmente cartilaginoso. Predominantemente marinhos.</p>
-            </div>
-
-            <!-- Exemplos Bloco Destacado -->
-            <div class="bg-slate-800 text-white rounded-xl p-5 border-l-4 border-sky-400 shadow-md">
-                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-camera-retro text-sky-400"></i> Espécies Representantes (Exemplos)</h3>
-                <ul class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm text-slate-300">
-                    <li class="bg-slate-700 px-3 py-2 rounded">🦈 Tubarão-branco</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🌊 Raia-manta</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🐟 Quimera (Peixe-rato)</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🦈 Tubarão-martelo</li>
-                </ul>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Termorregulação & Circulação -->
-                <div class="p-5 bg-rose-50 rounded-xl border border-rose-200">
-                    <h4 class="font-bold text-rose-800 mb-2 border-b border-rose-200 pb-2"><i class="fa-solid fa-temperature-half mr-2"></i>Fisiologia e Circulação</h4>
-                    <p class="text-sm text-slate-700 mb-3"><strong>Termorregulação:</strong> São <span class="tech-pill tech-pill-alert">Ectotérmicos (Pecilotérmicos)</span>, a temperatura corporal varia com a água.</p>
-                    <p class="text-sm text-slate-700"><strong>Circulação:</strong> <span class="tech-pill bg-rose-200 text-rose-900 border-rose-300">Simples e Completa</span>. Coração com apenas <strong>2 cavidades</strong> (1 átrio e 1 ventrículo). Passa <strong>apenas sangue venoso</strong> (rico em CO2) pelo coração, que é bombeado para as brânquias para ser oxigenado.</p>
-                </div>
-
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-sky-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-lungs mr-2"></i>Respiração e Opérculo</h4>
-                    <p class="text-sm text-slate-600">Respiração branquial. Possuem fendas expostas (5 a 7 pares) e <strong>ausência de opérculo</strong> protetor (exceto nas quimeras).</p>
-                </div>
-                
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-sky-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-arrows-up-down mr-2"></i>Flutuação e Digestão</h4>
-                    <p class="text-sm text-slate-600">Sem bexiga natatória. Flutuam graças a um <strong>fígado imenso</strong> rico no óleo <span class="tech-pill">Esqualeno</span>. Intestino com <span class="tech-pill">Válvula Espiral</span> para aumentar absorção.</p>
-                </div>
-
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-sky-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-droplet mr-2"></i>Excreção e Pele</h4>
-                    <p class="text-sm text-slate-600">Pele com <strong>escamas placoides</strong> (dermoepidérmicas). Para não desidratar no mar salgado, fazem <span class="tech-pill">Uremia Fisiológica</span> (guardam ureia no sangue para equilibrar a osmose).</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= VIEW: OSTEICHTHYES ================= -->
-        <section id="view-osteichthyes" class="view-page space-y-6">
-            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Osteichthyes (Osteíctes)</h2>
-                <p class="text-slate-600">Peixes com esqueleto predominantemente ósseo. Representam o maior grupo de vertebrados vivos.</p>
-            </div>
-
-            <!-- Exemplos Bloco Destacado -->
-            <div class="bg-slate-800 text-white rounded-xl p-5 border-l-4 border-blue-400 shadow-md">
-                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-camera-retro text-blue-400"></i> Espécies Representantes (Exemplos)</h3>
-                <ul class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm text-slate-300">
-                    <li class="bg-slate-700 px-3 py-2 rounded">🐟 Sardinha & Salmão</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🐠 Peixe-palhaço</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🐡 Baiacu</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🐉 Cavalo-marinho</li>
-                </ul>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Termorregulação & Circulação -->
-                <div class="p-5 bg-rose-50 rounded-xl border border-rose-200">
-                    <h4 class="font-bold text-rose-800 mb-2 border-b border-rose-200 pb-2"><i class="fa-solid fa-temperature-half mr-2"></i>Fisiologia e Circulação</h4>
-                    <p class="text-sm text-slate-700 mb-3"><strong>Termorregulação:</strong> São <span class="tech-pill tech-pill-alert">Ectotérmicos (Pecilotérmicos)</span>, assim como os cartilaginosos.</p>
-                    <p class="text-sm text-slate-700"><strong>Circulação:</strong> <span class="tech-pill bg-rose-200 text-rose-900 border-rose-300">Simples e Completa</span>. Coração <strong>bicavitário</strong> (1 átrio, 1 ventrículo). O coração bombeia <strong>exclusivamente sangue venoso</strong> para as brânquias para ser oxigenado antes de ir para o corpo.</p>
-                </div>
-
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-blue-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-shield-halved mr-2"></i>Respiração e Opérculo</h4>
-                    <p class="text-sm text-slate-600">Brânquias protegidas e cobertas por uma placa óssea articulada chamada <span class="tech-pill">Opérculo</span>, que atua bombeando água continuamente.</p>
-                </div>
-                
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-blue-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-gauge-high mr-2"></i>Bexiga Natatória</h4>
-                    <p class="text-sm text-slate-600">Possuem a <span class="tech-pill">Bexiga Natatória</span> (saco de gás) que atua como órgão hidrostático, permitindo parar na coluna de água sem afundar (ao contrário dos tubarões).</p>
-                </div>
-
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-blue-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-recycle mr-2"></i>Excreção</h4>
-                    <p class="text-sm text-slate-600">Por viverem em água doce ou salgada, a maioria é <span class="tech-pill">Amoniotélica</span> (excreta diretamente amônia, que é altamente tóxica mas diluída na água abundante).</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= VIEW: AMPHIBIA ================= -->
-        <section id="view-amphibia" class="view-page space-y-6">
-            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Amphibia (Anfíbios)</h2>
-                <p class="text-slate-600">A marca da transição evolutiva da água para a terra firme, mas com forte dependência hídrica.</p>
-            </div>
-
-            <!-- Exemplos Bloco Destacado -->
-            <div class="bg-slate-800 text-white rounded-xl p-5 border-l-4 border-emerald-400 shadow-md">
-                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-camera-retro text-emerald-400"></i> Espécies Representantes (Exemplos)</h3>
-                <ul class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm text-slate-300">
-                    <li class="bg-slate-700 px-3 py-2 rounded">🐸 <strong>Anuros:</strong> Sapo-cururu, Rã, Perereca (sem cauda)</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🦎 <strong>Urodelos:</strong> Salamandra, Tritão (com cauda)</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🐍 <strong>Ápodes:</strong> Cobra-cega / Cecília (sem patas)</li>
-                </ul>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Termorregulação & Circulação -->
-                <div class="p-5 bg-rose-50 rounded-xl border border-rose-200">
-                    <h4 class="font-bold text-rose-800 mb-2 border-b border-rose-200 pb-2"><i class="fa-solid fa-temperature-half mr-2"></i>Fisiologia e Circulação</h4>
-                    <p class="text-sm text-slate-700 mb-3"><strong>Termorregulação:</strong> São <span class="tech-pill tech-pill-alert">Ectotérmicos (Pecilotérmicos)</span>.</p>
-                    <p class="text-sm text-slate-700"><strong>Circulação:</strong> <span class="tech-pill bg-rose-200 text-rose-900 border-rose-300">Dupla e Incompleta</span>. O sangue passa duas vezes no coração por ciclo. Coração <strong>tricavitário</strong> (2 átrios, 1 ventrículo). Ocorre <strong>mistura de sangue venoso e arterial no único ventrículo</strong>, reduzindo a eficiência do transporte de O2.</p>
-                </div>
-
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-emerald-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-wind mr-2"></i>Respiração Dupla (Pele e Pulmão)</h4>
-                    <p class="text-sm text-slate-600">Seus pulmões são <span class="tech-pill">Saculiformes</span> (poucos alvéolos, baixa eficiência). Necessitam vitalmente de complementar com a <strong>Respiração Cutânea</strong> (hematose pela pele fina, nua e sempre úmida).</p>
-                </div>
-                
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-emerald-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-egg mr-2"></i>Reprodução e Metamorfose</h4>
-                    <p class="text-sm text-slate-600">Fecundação externa. São <span class="tech-pill">Anamniotas</span> (ovos sem casca depositados na água). Nascem como larvas aquáticas branquiadas (girinos) que sofrem <strong>metamorfose</strong> para adulto terrestre.</p>
-                </div>
-
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-emerald-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-flask mr-2"></i>Excreção</h4>
-                    <p class="text-sm text-slate-600">A excreção muda ao longo da vida: O girino aquático excreta amônia (<span class="tech-pill">Amoniotélico</span>), e o adulto terrestre passa a excretar ureia (<span class="tech-pill">Ureotélico</span>).</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= VIEW: REPTILIA ================= -->
-        <section id="view-reptilia" class="view-page space-y-6">
-            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Reptilia (Répteis)</h2>
-                <p class="text-slate-600">A libertação evolutiva e conquista definitiva do ambiente terrestre e seco.</p>
-            </div>
-
-            <!-- Exemplos Bloco Destacado -->
-            <div class="bg-slate-800 text-white rounded-xl p-5 border-l-4 border-amber-400 shadow-md">
-                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-camera-retro text-amber-400"></i> Espécies Representantes (Exemplos)</h3>
-                <ul class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm text-slate-300">
-                    <li class="bg-slate-700 px-3 py-2 rounded">🐍 <strong>Escamados:</strong> Cobra-coral, Cascavel, Iguana, Lagartixa</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🐢 <strong>Quelônios:</strong> Tartaruga, Cágado, Jabuti</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🐊 <strong>Crocodilianos:</strong> Jacaré-do-pantanal, Crocodilo, Gavial</li>
-                </ul>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Termorregulação & Circulação -->
-                <div class="p-5 bg-rose-50 rounded-xl border border-rose-200">
-                    <h4 class="font-bold text-rose-800 mb-2 border-b border-rose-200 pb-2"><i class="fa-solid fa-temperature-half mr-2"></i>Fisiologia e Circulação</h4>
-                    <p class="text-sm text-slate-700 mb-3"><strong>Termorregulação:</strong> Continuam sendo <span class="tech-pill tech-pill-alert">Ectotérmicos (Pecilotérmicos)</span>. (Precisam tomar sol para aquecer).</p>
-                    <p class="text-sm text-slate-700"><strong>Circulação:</strong> <span class="tech-pill bg-rose-200 text-rose-900 border-rose-300">Dupla e Incompleta</span>. Na maioria (cobras/tartarugas) o coração é <strong>tricavitário</strong> (mistura no ventrículo). Nos <strong>Crocodilianos</strong> é <strong>tetracavitário</strong> (4 cavidades), mas a mistura sanguínea ocorre fora do coração através de um desvio chamado <span class="tech-pill">Forame de Panizza</span>.</p>
-                </div>
-
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-amber-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-egg mr-2"></i>Ovo Amniota (Inovação)</h4>
-                    <p class="text-sm text-slate-600">Ovo com casca dura que não resseca. Apresenta anexos exclusivos: <span class="tech-pill">Âmnio</span> (bolsa d'água protetora), <span class="tech-pill">Córion</span> (trocas gasosas), <span class="tech-pill">Alantoide</span> (armazena xixi/excreta) e saco vitelínico.</p>
-                </div>
-                
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-amber-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-shield mr-2"></i>Pele Queratinizada</h4>
-                    <p class="text-sm text-slate-600">Para não desidratar no deserto, a pele é extremamente grossa, sem glândulas e altamente <span class="tech-pill">Queratinizada</span> (escamas ou placas córneas). Fim da respiração cutânea (respiração 100% pulmonar).</p>
-                </div>
-
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-amber-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-prescription-bottle mr-2"></i>Excreção Ultra-Econômica</h4>
-                    <p class="text-sm text-slate-600">São <span class="tech-pill">Uricotélicos</span>. Excretam <strong>Ácido Úrico</strong> (uma pasta branca cristalizada) que é atóxico e quase não gasta água para ser eliminado pelo corpo.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= VIEW: AVES ================= -->
-        <section id="view-aves" class="view-page space-y-6">
-            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Aves</h2>
-                <p class="text-slate-600">Mestres do voo e detentores de metabolismo alto e constante (descendentes dos dinossauros terópodes).</p>
-            </div>
-
-            <!-- Exemplos Bloco Destacado -->
-            <div class="bg-slate-800 text-white rounded-xl p-5 border-l-4 border-indigo-400 shadow-md">
-                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-camera-retro text-indigo-400"></i> Espécies Representantes (Exemplos)</h3>
-                <ul class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm text-slate-300">
-                    <li class="bg-slate-700 px-3 py-2 rounded">🕊️ Beija-flor (Metabolismo altíssimo)</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🦅 Águia-careca (Rapina)</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🐧 Pinguim (Natação/Mergulho)</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🏃 Avestruz (Ratita - Não voa)</li>
-                </ul>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Termorregulação & Circulação -->
-                <div class="p-5 bg-rose-50 rounded-xl border border-rose-200">
-                    <h4 class="font-bold text-rose-800 mb-2 border-b border-rose-200 pb-2"><i class="fa-solid fa-temperature-half mr-2"></i>Fisiologia e Circulação</h4>
-                    <p class="text-sm text-slate-700 mb-3"><strong>Termorregulação:</strong> Surgimento evolutivo da <span class="tech-pill bg-green-200 text-green-900 border-green-300">Endotermia (Homeotermia)</span>! O próprio metabolismo gera calor, mantendo o corpo quente constante (penas ajudam a isolar).</p>
-                    <p class="text-sm text-slate-700"><strong>Circulação:</strong> <span class="tech-pill bg-emerald-200 text-emerald-900 border-emerald-300">Dupla e Completa</span>. Coração com <strong>4 cavidades (Tetracavitário)</strong>. <strong>Não há mistura</strong> de sangue venoso e arterial, elevando absurdamente a oxigenação dos tecidos. A <span class="tech-pill">Aorta curva-se para a DIREITA</span>.</p>
-                </div>
-
-                <div class="p-5 bg-white rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-indigo-500">
-                    <h4 class="font-bold text-indigo-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-lungs mr-2"></i>Respiração e Sacos Aéreos</h4>
-                    <p class="text-sm text-slate-600">Possuem pulmões parenquimatosos altamente eficientes. A grande inovação são os <span class="tech-pill text-indigo-700 bg-indigo-100 border-indigo-300">Sacos Aéreos</span>: Bolsas ligadas aos pulmões que se espalham pelo corpo. <strong>Atenção: Os sacos aéreos NÃO fazem hematose (troca gasosa)</strong>. Sua função é atuar como foles, garantindo um <strong>fluxo de ar contínuo e sempre rico em O2 através dos pulmões</strong>, além de ajudarem dissipar o intenso calor muscular gerado no voo.</p>
-                </div>
-                
-                <div class="p-5 bg-white rounded-xl border border-slate-200 shadow-sm border-l-4 border-l-indigo-500">
-                    <h4 class="font-bold text-indigo-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-feather-pointed mr-2"></i>Adaptações de Redução de Peso (Voo)</h4>
-                    <p class="text-sm text-slate-600">Para levantar voo, cada grama importa. Aves não guardam excessos:</p>
-                    <ul class="text-sm text-slate-600 mt-2 list-disc pl-4 space-y-1">
-                        <li>Possuem <span class="tech-pill">Ossos Pneumáticos</span> (ossos porosos, leves e cheios de ar no interior).</li>
-                        <li><strong>Ausência total de dentes</strong> (possuem bico de queratina leve e moela mecânica).</li>
-                        <li><strong>Ausência de Bexiga Urinária</strong> (excretam ácido úrico pastoso junto com as fezes continuamente para não carregar peso líquido).</li>
-                    </ul>
-                </div>
-
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-indigo-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-bone mr-2"></i>Osso Quilha (Carena)</h4>
-                    <p class="text-sm text-slate-600">O osso do esterno possui uma imensa projeção chamada <span class="tech-pill">Quilha</span> ou <span class="tech-pill">Carena</span>. É ali que se anexam os poderosos e gigantescos músculos peitorais responsáveis pelo bater de asas.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= VIEW: MAMMALIA ================= -->
-        <section id="view-mammalia" class="view-page space-y-6">
-            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Mammalia (Mamíferos)</h2>
-                <p class="text-slate-600">Grupo com extrema plasticidade adaptativa, cuidado parental complexo e inteligência desenvolvida.</p>
-            </div>
-
-            <!-- Exemplos Bloco Destacado -->
-            <div class="bg-slate-800 text-white rounded-xl p-5 border-l-4 border-rose-400 shadow-md">
-                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-camera-retro text-rose-400"></i> Espécies Representantes (Exemplos Biológicos)</h3>
-                <ul class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm text-slate-300">
-                    <li class="bg-slate-700 px-3 py-2 rounded">👤 <strong>Placentários:</strong> Ser Humano, Cão, Baleia, Morcego</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🦘 <strong>Marsupiais:</strong> Canguru, Coala, Gambá, Diabo-da-tasmânia</li>
-                    <li class="bg-slate-700 px-3 py-2 rounded">🦆 <strong>Monotremados:</strong> Ornitorrinco, Équidna (põem ovos)</li>
-                </ul>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Termorregulação & Circulação -->
-                <div class="p-5 bg-rose-50 rounded-xl border border-rose-200">
-                    <h4 class="font-bold text-rose-800 mb-2 border-b border-rose-200 pb-2"><i class="fa-solid fa-temperature-half mr-2"></i>Fisiologia e Circulação</h4>
-                    <p class="text-sm text-slate-700 mb-3"><strong>Termorregulação:</strong> Assim como as aves, somos <span class="tech-pill bg-green-200 text-green-900 border-green-300">Endotérmicos (Homeotérmicos)</span>, mantendo temperatura constante interna independente do clima.</p>
-                    <p class="text-sm text-slate-700"><strong>Circulação:</strong> <span class="tech-pill bg-emerald-200 text-emerald-900 border-emerald-300">Dupla e Completa</span>. Coração <strong>Tetracavitário (4 cavidades)</strong> e <strong>sem mistura</strong> de sangue. A grande diferença para as Aves é que nos mamíferos a <span class="tech-pill">Aorta curva-se para a ESQUERDA</span>.</p>
-                </div>
-
-                <div class="p-5 bg-white rounded-xl border border-slate-200">
-                    <h4 class="font-bold text-rose-700 mb-2 border-b border-slate-100 pb-2"><i class="fa-solid fa-star mr-2"></i>Sinapomorfias (Características Exclusivas)</h4>
-                    <ul class="text-sm text-slate-600 mt-2 list-disc pl-4 space-y-1">
-                        <li><span class="tech-pill">Glândulas Mamárias</span>: Produzem leite materno.</li>
-                        <li><span class="tech-pill">Pelos</span>: Para reter o calor gerado pela endotermia.</li>
-                        <li><span class="tech-pill">Diafragma</span>: Músculo respiratório que separa tórax e abdômen.</li>
-                        <li><span class="tech-pill">Hemácias Anucleadas</span>: Glóbulos vermelhos sem núcleo para ter mais espaço para a hemoglobina e O2.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- MODAL OVERLAY (FOR SHORT RESUMES) -->
-    <div id="modal-container" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 relative transform transition-all scale-100">
-            <!-- Close Button X -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-red-100 hover:text-red-600 text-slate-500 flex items-center justify-center transition-colors">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <!-- Dynamic Modal Content -->
-            <div id="modal-content" class="space-y-4 pt-2">
-                <!-- Injected via JavaScript -->
-            </div>
+    <!-- Modal para pop-ups breves -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content" id="modal-content">
+            <button class="modal-close" onclick="closeModalForce()">&times;</button>
+            <h3 id="modal-title">Título</h3>
+            <p id="modal-text">Texto descritivo</p>
         </div>
     </div>
 
-    <!-- JavaScript Application Router & Logic -->
     <script>
-        // Data Store for Modal Pop-ups (Short Descriptives)
-        const modalData = {
-            urochordata: {
-                title: "Urochordata (Tunicados)",
-                icon: "fa-anchor",
-                color: "text-sky-600 bg-sky-50",
-                badge: "Subfilo",
-                content: `
-                    <p class="text-sm text-slate-600 leading-relaxed mt-2">
-                        São animais marinhos. A grande maioria é séssil (fixa em rochas) quando adultos. Exemplo principal: <strong>Ascídias</strong>.
-                    </p>
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2 text-sm text-slate-700 mt-4">
-                        <p><strong><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> Biologia Chave:</strong> A Notocorda e o Tubo Neural só existem na fase de larva, limitados à região da <strong>cauda</strong>. Durante a metamorfose, eles perdem essas estruturas.</p>
-                        <p><strong><i class="fa-solid fa-shield text-blue-500 mr-1"></i> Revestimento:</strong> O corpo adulto é envolto por uma Túnica feita de um açúcar muito parecido com a celulose (Tunicina).</p>
+        // Dados de Navegação e Conteúdo
+        const contentData = {
+            chordata: {
+                title: "Filo Chordata (Cordados)",
+                html: `
+                    <h2>Filo Chordata</h2>
+                    <p>Os cordados reúnem animais de extrema complexidade evolutiva. Para pertencer a este filo, o organismo deve apresentar <strong>4 características embrionárias obrigatórias (sinapomorfias)</strong> em pelo menos alguma fase do seu ciclo de vida:</p>
+                    <ul>
+                        <li><strong>Notocorda:</strong> Eixo esquelético dorsal flexível.</li>
+                        <li><strong>Tubo Neural Dorsal Oco:</strong> Origina o Sistema Nervoso Central (encéfalo e medula).</li>
+                        <li><strong>Fendas Faríngeas:</strong> Aberturas na faringe (respiração em aquáticos, estruturas cervicais/ouvido em terrestres).</li>
+                        <li><strong>Cauda Pós-anal:</strong> Extensão locomotora posterior ao ânus.</li>
+                    </ul>
+                    <div class="tech-box"><strong>Dica de Vestibular:</strong> As fendas faríngeas e a notocorda podem ser transitórias, presentes apenas na fase embrionária ou larval de alguns grupos.</div>
+                    
+                    <h3>Subfilos dos Cordados</h3>
+                    <p>Escolha abaixo o subfilo que deseja explorar:</p>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="openModal('Urochordata (Tunicados)', 'Animais marinhos sésseis (ex: ascídias). A notocorda e o tubo neural estão presentes apenas na fase larval móvel, regredindo na fase adulta.')">
+                            <h4>Urochordata</h4>
+                            <p>Ex: Ascídias e Tunicados.</p>
+                            <button class="btn-action">Ver Resumo Rápido</button>
+                        </div>
+                        <div class="option-card" onclick="openModal('Cephalochordata (Cefalocordados)', 'Pequenos animais marinhos fusiformes (ex: anfioxo). Mantêm a notocorda e o tubo neural por toda a vida adulta.')">
+                            <h4>Cephalochordata</h4>
+                            <p>Ex: Anfioxo.</p>
+                            <button class="btn-action">Ver Resumo Rápido</button>
+                        </div>
+                        <div class="option-card" onclick="navigateTo('craniata')">
+                            <h4>Craniata (Vertebrata)</h4>
+                            <p>Possuem crânio protegendo o encéfalo e coluna vertebral derivada da notocorda.</p>
+                            <button class="btn-action">Acessar Subfilo</button>
+                        </div>
                     </div>
                 `
             },
-            cephalochordata: {
-                title: "Cephalochordata",
-                icon: "fa-fish",
-                color: "text-amber-600 bg-amber-50",
-                badge: "Subfilo",
-                content: `
-                    <p class="text-sm text-slate-600 leading-relaxed mt-2">
-                        Pequenos cordados marinhos translúcidos que vivem semi-enterrados na areia filtrando água. Exemplo clássico: <strong>Anfioxo</strong>.
-                    </p>
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2 text-sm text-slate-700 mt-4">
-                        <p><strong><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> Biologia Chave:</strong> A Notocorda percorre todo o dorso (da cauda até a cabeça) e <strong>persiste durante toda a vida adulta</strong> (não vira osso/coluna).</p>
-                        <p><strong><i class="fa-solid fa-skull-crossbones text-red-500 mr-1"></i> Estrutura:</strong> Não possuem crânio verdadeiro e nem encéfalo complexo. É um excelente modelo biológico para entender a base evolutiva dos vertebrados.</p>
+            craniata: {
+                title: "Subfilo Craniata (Vertebrados)",
+                html: `
+                    <h2>Subfilo Craniata / Vertebrata</h2>
+                    <p>Caracterizam-se pela presença de um <strong>crânio</strong> cartilaginoso ou ósseo e substituição total ou parcial da notocorda por uma coluna vertebral segmentada.</p>
+                    
+                    <h3>Divisão Principal</h3>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="openModal('Agnatha (Ciclóstomos)', 'Vertebrados basais desprovidos de mandíbula (maxilas), com boca circular sugadora e esqueleto cartilaginoso. Ex: Lampreias e Feiticeiras.')">
+                            <h4>Agnatha (Sem Mandíbula)</h4>
+                            <p>Ex: Lampreias e Feiticeiras.</p>
+                            <button class="btn-action">Ver Resumo Rápido</button>
+                        </div>
+                        <div class="option-card" onclick="navigateTo('gnathostomata')">
+                            <h4>Gnathostomata (Com Mandíbula)</h4>
+                            <p>Vertebrados mandibulados, englobando peixes com mandíbula e todos os tetrápodes.</p>
+                            <button class="btn-action">Acessar Grupo</button>
+                        </div>
                     </div>
                 `
             },
-            agnatha: {
-                title: "Agnatha (Ciclóstomos)",
-                icon: "fa-circle-notch",
-                color: "text-purple-600 bg-purple-50",
-                badge: "Vertebrados Inferiores",
-                content: `
-                    <p class="text-sm text-slate-600 leading-relaxed mt-2">
-                        São os únicos vertebrados <strong>sem mandíbula</strong>. Em vez de morder, eles sugam ou raspam com dentes córneos e uma boca circular.
-                    </p>
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2 text-sm text-slate-700 mt-4">
-                        <p><strong><i class="fa-solid fa-bug text-purple-500 mr-1"></i> Exemplos:</strong><br> - <strong>Lampreias:</strong> Atuam como parasitas (grudam em peixes para sugar fluidos).<br>- <strong>Feiticeiras (Mixinas):</strong> Necrófagas (comem carcaças de peixes mortos).</p>
-                        <p><strong><i class="fa-solid fa-bone text-purple-500 mr-1"></i> Anatomia:</strong> Não possuem nadadeiras aos pares e o esqueleto é cartilaginoso. Não possuem escamas, a pele é lisa e extremamente mucosa.</p>
+            gnathostomata: {
+                title: "Gnathostomata (Vertebrados Mandibulados)",
+                html: `
+                    <h2>Gnathostomata</h2>
+                    <p>O surgimento da <strong>mandíbula</strong> (maxila articulada) permitiu a predação ativa e a exploração de novas fontes alimentares. Dividem-se em peixes mandibulados e tetrápodes terrestres.</p>
+                    
+                    <h3>Classes e Agrupamentos</h3>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="navigateTo('fishes')">
+                            <h4>Peixes (Cartilaginosos e Ósseos)</h4>
+                            <p>Vertebrados aquáticos com brânquias e nadadeiras.</p>
+                            <button class="btn-action">Acessar Peixes</button>
+                        </div>
+                        <div class="option-card" onclick="navigateTo('amphibia')">
+                            <h4>Amphibia (Anfíbios)</h4>
+                            <p>Primeiros tetrápodes, transição terra-água.</p>
+                            <button class="btn-action">Acessar Anfíbios</button>
+                        </div>
+                        <div class="option-card" onclick="navigateTo('reptilia')">
+                            <h4>Reptilia (Répteis)</h4>
+                            <p>Ovo amniota e conquista definitiva da terra.</p>
+                            <button class="btn-action">Acessar Répteis</button>
+                        </div>
+                        <div class="option-card" onclick="navigateTo('aves')">
+                            <h4>Aves (Aves)</h4>
+                            <p>Endotermia e adaptações aerodinâmicas para o voo.</p>
+                            <button class="btn-action">Acessar Aves</button>
+                        </div>
+                        <div class="option-card" onclick="navigateTo('mammalia')">
+                            <h4>Mammalia (Mamíferos)</h4>
+                            <p>Glândulas mamárias, pelos e diafragma.</p>
+                            <button class="btn-action">Acessar Mamíferos</button>
+                        </div>
                     </div>
+                `
+            },
+            fishes: {
+                title: "Peixes (Chondrichthyes e Osteichthyes)",
+                html: `
+                    <h2>Superclasse Peixes</h2>
+                    <p>Grupo de vertebrados aquáticos divididos em dois grandes ramos evolutivos baseados na composição do esqueleto.</p>
+                    
+                    <h3>Escolha o grupo de peixes:</h3>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="navigateTo('chondrichthyes')">
+                            <h4>Chondrichthyes (Cartilaginosos)</h4>
+                            <p>Tubarões, raias e quimeras.</p>
+                            <button class="btn-action">Detalhar Cartilaginosos</button>
+                        </div>
+                        <div class="option-card" onclick="navigateTo('osteichthyes')">
+                            <h4>Osteichthyes (Ósseos)</h4>
+                            <p>Sardinha, salmão, cavalo-marinho.</p>
+                            <button class="btn-action">Detalhar Ósseos</button>
+                        </div>
+                    </div>
+                `
+            },
+            chondrichthyes: {
+                title: "Peixes Cartilaginosos (Chondrichthyes)",
+                html: `
+                    <h2>Chondrichthyes (Peixes Cartilaginosos)</h2>
+                    <p>Exemplos: Tubarões, raias e quimeras.</p>
+                    <ul>
+                        <li><strong>Esqueleto:</strong> Endoesqueleto 100% cartilaginoso.</li>
+                        <li><strong>Boca e Escamas:</strong> Boca em posição ventral; escamas do tipo <strong>placoides</strong> (dentes dérmicos).</li>
+                        <li><strong>Respiração:</strong> Fendas branquiais expostas (sem opérculo).</li>
+                        <li><strong>Flutuação:</strong> Ausência de bexiga natatória; utilizam um <strong>fígado hipertrofiado rico em esqualeno</strong> (óleo leve).</li>
+                        <li><strong>Fisiologia e Circulação:</strong> Circulação <strong>Simples</strong> (coração com 1 átrio e 1 ventrículo por onde passa <strong>apenas sangue venoso</strong>). Realizam <strong>uremia fisiológica</strong> (retenção de ureia no sangue para isosmoticidade). Intestino curto com <strong>válvula espiral</strong>. Fecundação interna auxiliada por <strong>clásperes</strong> nos machos.</li>
+                        <li><strong>Termorregulação:</strong> Ectotérmicos (pecilotérmicos).</li>
+                    </ul>
+                    <div class="examples-box"><strong>Espécies Representantes:</strong> Tubarão-branco, tubarão-martelo, arraia-lixa, quimera.</div>
+                `
+            },
+            osteichthyes: {
+                title: "Peixes Ósseos (Osteichthyes)",
+                html: `
+                    <h2>Osteichthyes (Peixes Ósseos)</h2>
+                    <p>Exemplos: Sardinha, bagre, cavalo-marinho, pirarucu.</p>
+                    <ul>
+                        <li><strong>Esqueleto:</strong> Endoesqueleto predominantemente ósseo.</li>
+                        <li><strong>Boca e Escamas:</strong> Boca em posição terminal; escamas dérmicas flexíveis (cicloides ou ctenoides).</li>
+                        <li><strong>Respiração:</strong> Brânquias protegidas por uma placa óssea chamada <strong>opérculo</strong>.</li>
+                        <li><strong>Flutuação:</strong> Presença de <strong>bexiga natatória</strong> (bolsa hidrostática de gás).</li>
+                        <li><strong>Fisiologia e Circulação:</strong> Circulação <strong>Simples</strong> (coração com 1 átrio e 1 ventrículo com sangue exclusivamente venoso). Amoniotélicos (excretam <strong>amônia</strong>, viável pela abundância de água). Presença de <strong>linha lateral</strong> (mecanorreceptora).</li>
+                        <li><strong>Termorregulação:</strong> Ectotérmicos (pecilotérmicos).</li>
+                    </ul>
+                    <div class="examples-box"><strong>Espécies Representantes:</strong> Salmão, tilápia, cavalo-marinho, celacanto.</div>
+                `
+            },
+            amphibia: {
+                title: "Amphibia (Anfíbios)",
+                html: `
+                    <h2>Amphibia (Anfíbios)</h2>
+                    <p>Exemplos: Sapos, rãs, pererecas, salamandras e cecílias.</p>
+                    <ul>
+                        <li><strong>Transição:</strong> Primeiros tetrápodes, mas fortemente dependentes da água para reprodução (anamniotas).</li>
+                        <li><strong>Respiração:</strong> Pulmões saculiformes simples complementados intensamente pela <strong>hematose cutânea</strong> (pele fina, úmida e sem queratina). Nas larvas (girinos), respiração branquial.</li>
+                        <li><strong>Fisiologia e Circulação:</strong> Circulação <strong>Dupla e Incompleta</strong>. Coração tricavitário (2 átrios e 1 ventrículo), onde ocorre mistura parcial de sangue venoso e arterial no ventrículo único.</li>
+                        <li><strong>Excreção:</strong> Amoniotélicos na fase larval e ureotélicos na fase adulta.</li>
+                        <li><strong>Termorregulação:</strong> Ectotérmicos (pecilotérmicos).</li>
+                    </ul>
+                    <div class="examples-box"><strong>Espécies Representantes:</strong> Sapo-cururu, rã-touro, salamandra-de-fogo, cobra-cega (cecília).</div>
+                `
+            },
+            reptilia: {
+                title: "Reptilia (Répteis)",
+                html: `
+                    <h2>Reptilia (Répteis)</h2>
+                    <p>Exemplos: Cobras, lagartos, tartarugas e jacarés.</p>
+                    <ul>
+                        <li><strong>A grande inovação:</strong> Surgimento do <strong>ovo amniota</strong> (com casca protetora e anexos embrionários: âmnio, córion, alantoide e saco vitelínico) e pele altamente <strong>queratinizada</strong> (impermeável).</li>
+                        <li><strong>Respiração:</strong> Exclusivamente pulmonar (pulmões parenquimatosos mais complexos).</li>
+                        <li><strong>Fisiologia e Circulação:</strong> Circulação <strong>Dupla e Incompleta</strong> na maioria (coração tricavitário com septo incompleto). Nos <strong>crocodilianos</strong>, o coração é tetracavitário, mas ocorre mistura de sangue na saída através do <strong>Forame de Panizza</strong>.</li>
+                        <li><strong>Excreção:</strong> Uricotélicos (excretam <strong>ácido úrico</strong> para máxima economia de água).</li>
+                        <li><strong>Termorregulação:</strong> Ectotérmicos (pecilotérmicos).</li>
+                    </ul>
+                    <div class="examples-box"><strong>Espécies Representantes:</strong> Jacaré-de-papo-amarelo, jararaca, iguana, tartaruga-verde.</div>
+                `
+            },
+            aves: {
+                title: "Aves (Aves)",
+                html: `
+                    <h2>Aves</h2>
+                    <p>Exemplos: Beija-flor, pomba, águia, avestruz.</p>
+                    <ul>
+                        <li><strong>Endotermia:</strong> Capacidade de gerar calor metabólico interno (homeotérmicas).</li>
+                        <li><strong>Respiração e Ventilação:</strong> Pulmões rígidos associados a <strong>sacos aéreos</strong> extensos. Os sacos aéreos funcionam como foles para manter fluxo contínuo e unidirecional de ar fresco, otimizando a respiração e auxiliando na refrigeração corporal.</li>
+                        <li><strong>Redução de Peso para o Voo:</strong> Presença de <strong>ossos pneumáticos</strong> (ocos), <strong>ausência de dentes</strong> (substituídos por bico córneo) e <strong>ausência de bexiga urinária</strong> (excreção imediata de ácido úrico).</li>
+                        <li><strong>Fisiologia e Circulação:</strong> Circulação <strong>Dupla e Completa</strong> (coração tetracavitário perfeito, sem mistura de sangue). Artéria aorta curvada para a <strong>direita</strong>. Presença de <strong>quilha ou carena</strong> (osso esterno expandido para inserção dos músculos peitorais).</li>
+                    </ul>
+                    <div class="examples-box"><strong>Espécies Representantes:</strong> João-de-barro, gavião-real, pinguim, avestruz.</div>
+                `
+            },
+            mammalia: {
+                title: "Mammalia (Mamíferos)",
+                html: `
+                    <h2>Mammalia (Mamíferos)</h2>
+                    <p>Exemplos: Humanos, baleias, morcegos, cangurus.</p>
+                    <ul>
+                        <li><strong>Sinapomorfias Exclusivas:</strong> Glândulas mamárias (produção de leite), pelos para isolamento térmico, músculo <strong>diafragma</strong> (essencial para ventilação pulmonar) e eritrócitos anucleados.</li>
+                        <li><strong>Esqueleto:</strong> Presença constante de <strong>7 vértebras cervicais</strong> no pescoço (desde o rato até a girafa e a baleia).</li>
+                        <li><strong>Fisiologia e Circulação:</strong> Circulação <strong>Dupla e Completa</strong> (coração tetracavitário, sem mistura de sangue). Artéria aorta curvada para a <strong>esquerda</strong>. Termorregulação endotérmica.</li>
+                        <li><strong>Grupos Reprodutivos:</strong>
+                            <ul>
+                                <li><strong>Monotremados (Prototheria):</strong> Ovíparos com cloaca (ex: Ornitorrinco).</li>
+                                <li><strong>Marsupiais (Metatheria):</strong> Filhotes nascem prematuros e completam o desenvolvimento no marsúpio (ex: Canguru).</li>
+                                <li><strong>Placentários (Eutheria):</strong> Desenvolvimento completo no útero via placenta corioalantoide (ex: Humanos, cães).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="examples-box"><strong>Espécies Representantes:</strong> Morcego-vampiro, baleia-azul, onça-pintada, ornitorrinco, ser humano.</div>
                 `
             }
         };
 
-        // Breadcrumb Configuration Mapping
-        const routeConfig = {
-            home: { trail: [{ id: "home", label: "Filo Cordata" }] },
-            craniata: { trail: [ { id: "home", label: "Cordata" }, { id: "craniata", label: "Craniata (Vertebrata)" } ] },
-            gnathostomata: { trail: [ { id: "home", label: "Cordata" }, { id: "craniata", label: "Craniata" }, { id: "gnathostomata", label: "Gnathostomata" } ] },
-            peixes: { trail: [ { id: "home", label: "Cordata" }, { id: "craniata", label: "Craniata" }, { id: "gnathostomata", label: "Gnathostomata" }, { id: "peixes", label: "Peixes" } ] },
-            chondrichthyes: { trail: [ { id: "home", label: "Cordata" }, { id: "craniata", label: "Craniata" }, { id: "gnathostomata", label: "Gnathostomata" }, { id: "peixes", label: "Peixes" }, { id: "chondrichthyes", label: "Chondrichthyes (Condrictes)" } ] },
-            osteichthyes: { trail: [ { id: "home", label: "Cordata" }, { id: "craniata", label: "Craniata" }, { id: "gnathostomata", label: "Gnathostomata" }, { id: "peixes", label: "Peixes" }, { id: "osteichthyes", label: "Osteichthyes (Osteíctes)" } ] },
-            amphibia: { trail: [ { id: "home", label: "Cordata" }, { id: "craniata", label: "Craniata" }, { id: "gnathostomata", label: "Gnathostomata" }, { id: "amphibia", label: "Amphibia" } ] },
-            reptilia: { trail: [ { id: "home", label: "Cordata" }, { id: "craniata", label: "Craniata" }, { id: "gnathostomata", label: "Gnathostomata" }, { id: "reptilia", label: "Reptilia" } ] },
-            aves: { trail: [ { id: "home", label: "Cordata" }, { id: "craniata", label: "Craniata" }, { id: "gnathostomata", label: "Gnathostomata" }, { id: "aves", label: "Aves" } ] },
-            mammalia: { trail: [ { id: "home", label: "Cordata" }, { id: "craniata", label: "Craniata" }, { id: "gnathostomata", label: "Gnathostomata" }, { id: "mammalia", label: "Mammalia" } ] }
-        };
-
-        // Navigation Engine
-        function navigateTo(viewId) {
-            if (!routeConfig[viewId]) return;
-            // Hide all pages
-            document.querySelectorAll('.view-page').forEach(page => { page.classList.remove('active'); });
-            // Activate Target Page
-            const targetPage = document.getElementById(`view-${viewId}`);
-            if (targetPage) {
-                targetPage.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Banco de Questões Discursivas para Treino
+        const quizData = [
+            {
+                q: "Quais são as quatro características embrionárias obrigatórias (sinapomorfias) que definem o filo Chordata?",
+                a: "1) Notocorda (eixo esquelético dorsal flexível); 2) Tubo neural dorsal oco (origina o SNC); 3) Fendas faríngeas (aberturas na faringe); 4) Cauda pós-anal (extensão locomotora posterior)."
+            },
+            {
+                q: "Qual é a principal inovação anatômica que diferencia o subfilo Craniata dos demais subfilos de cordados, e qual grupo basal de craniados carece de mandíbulas?",
+                a: "A principal inovação é o desenvolvimento do crânio protegendo o encéfalo. O grupo basal sem mandíbulas é o dos agnatas (ciclóstomos), como as lampreias e feiticeiras."
+            },
+            {
+                q: "Explique como os peixes cartilaginosos (Condrictes) conseguem manter a flutuação hidrostática na ausência de bexiga natatória.",
+                a: "Eles utilizam um fígado hipertrofiado e rico em uma substância lipídica de baixa densidade chamada esqualeno, que atua como órgão hidrostático flutuante."
+            },
+            {
+                q: "Compare a respiração e a presença de opérculo entre os peixes cartilaginosos e os peixes ósseos.",
+                a: "Os cartilaginosos possuem fendas branquiais externas e expostas, sem opérculo. Os peixes ósseos possuem brânquias protegidas por uma placa óssea rígida chamada opérculo."
+            },
+            {
+                q: "Como se caracteriza a circulação sanguínea nos peixes (cartilaginosos e ósseos) e por que não se aplica o termo 'incompleta' a ela?",
+                a: "A circulação é Simples (o sangue passa pelo coração apenas uma vez por ciclo). O coração possui 1 átrio e 1 ventrículo e recebe exclusivamente sangue venoso, enviando-o direto às brânquias. Como nunca há encontro de dois tipos de sangue no coração, o conceito de mistura (completa/incompleta) não se aplica."
+            },
+            {
+                q: "Qual é a importância da 'uremia fisiológica' nos peixes cartilaginosos marinhos?",
+                a: "Consiste na retenção controlada de ureia no sangue, elevando a pressão osmótica interna para equipará-la à salinidade da água do mar, evitando a perda osmótica de água para o ambiente."
+            },
+            {
+                q: "Por que os anfíbios dependem estritamente de ambientes úmidos, citando suas limitações respiratórias e reprodutivas?",
+                a: "Eles possuem pulmões simples (saculiformes) e dependem fortemente da respiração cutânea, exigindo que a pele permaneça úmida para a difusão de gases. Reprodutivamente, são anamniotas (ovos sem casca), dependendo da água para a fecundação externa e desenvolvimento larval (girinos)."
+            },
+            {
+                q: "Descreva a grande inovação evolutiva presente nos répteis que permitiu a conquista definitiva do ambiente terrestre.",
+                a: "O surgimento do ovo amniota (com casca protetora contra desidratação e anexos embrionários como âmnio, córion e alantoide) aliado à pele altamente queratinizada e impermeável."
+            },
+            {
+                q: "O que diferencia a circulação sanguínea dos crocodilianos em relação aos demais répteis não-crocodilianos?",
+                a: "Enquanto os demais répteis possuem coração tricavitário com mistura de sangue no ventrículo único, os crocodilianos possuem coração tetracavitário, mas ocorre mistura de sangue na saída dos arcos aórticos através de um canal anatômico chamado Forame de Panizza."
+            },
+            {
+                q: "Explique a função dos sacos aéreos nas aves e como eles se diferenciam estruturalmente da hematose pulmonar.",
+                a: "Os sacos aéreos funcionam como foles respiratórios que garantem um fluxo contínuo e unidirecional de ar fresco pelos pulmões rígidos. Eles não realizam troca gasosa direta (hematose), papel exclusivo dos parabrônquios pulmonares."
+            },
+            {
+                q: "Cite três adaptações morfológicas presentes nas aves voltadas especificamente para a redução de peso corporal visando o voo.",
+                a: "1) Presença de ossos pneumáticos (ocos e preenchidos por ar); 2) Ausência de dentes (substituídos por bico córneo leve); 3) Ausência de bexiga urinária (excreção imediata de ácido úrico pastoso)."
+            },
+            {
+                q: "Quais são as quatro sinapomorfias exclusivas (características marcantes) da classe Mammalia?",
+                a: "1) Presença de glândulas mamárias produtoras de leite; 2) Presença de pelos no revestimento corporal; 3) Músculo diafragma separando o tórax do abdômen; 4) Eritrócitos (glóbulos vermelhos) anucleados."
+            },
+            {
+                q: "Qual é a característica esquelética constante no pescoço de praticamente todos os mamíferos, do camundongo à girafa?",
+                a: "A presença exata de sete vértebras cervicais."
+            },
+            {
+                q: "Diferencie os três grandes grupos reprodutivos dos mamíferos (Monotremados, Marsupiais e Placentários).",
+                a: "1) Monotremados (Prototheria): ovíparos com cloaca; 2) Marsupiais (Metatheria): nascem prematuros e completam o desenvolvimento no marsúpio (bolsa abdominal); 3) Placentários (Eutheria): desenvolvimento embrionário completo no útero via placenta corioalantoide."
             }
-            // Render Breadcrumbs
-            renderBreadcrumb(viewId);
-        }
+        ];
 
-        // Breadcrumb Rendering Logic
-        function renderBreadcrumb(viewId) {
-            const container = document.getElementById('breadcrumb-container');
-            const trail = routeConfig[viewId].trail;
-            let html = '';
-            trail.forEach((item, index) => {
-                const isLast = index === trail.length - 1;
-                if (isLast) {
-                    html += `<span class="text-white font-bold bg-white/20 px-2.5 py-1 rounded-md shadow-sm border border-white/10">${item.label}</span>`;
+        // Estado da Navegação SPA
+        let historyStack = ['chordata'];
+
+        function renderCurrentView() {
+            const currentKey = historyStack[historyStack.length - 1];
+            const data = contentData[currentKey];
+            
+            // Renderizar Breadcrumbs
+            const breadcrumbEl = document.getElementById('breadcrumbs');
+            let breadcrumbHTML = '';
+            historyStack.forEach((key, index) => {
+                const titleName = contentData[key].title.split(' ')[0];
+                if (index > 0) breadcrumbHTML += `<span class="breadcrumb-separator">></span>`;
+                if (index === historyStack.length - 1) {
+                    breadcrumbHTML += `<span class="breadcrumb-current">${titleName}</span>`;
                 } else {
-                    html += `<button onclick="navigateTo('${item.id}')" class="text-bio-200 hover:text-white transition-colors flex items-center gap-1.5 hover:underline decoration-bio-400 underline-offset-4">${item.label}</button>
-                             <i class="fa-solid fa-chevron-right text-[10px] text-bio-400"></i>`;
+                    breadcrumbHTML += `<span class="breadcrumb-item" onclick="jumpToHistory(${index})">${titleName}</span>`;
                 }
             });
-            container.innerHTML = html;
-        }
+            breadcrumbEl.innerHTML = breadcrumbHTML;
 
-        // Modal Operations
-        function openModal(modalKey) {
-            const data = modalData[modalKey];
-            if (!data) return;
-            const modalContent = document.getElementById('modal-content');
-            modalContent.innerHTML = `
-                <div class="flex items-start gap-4 border-b border-slate-100 pb-4">
-                    <div class="p-4 ${data.color} rounded-xl text-2xl shadow-inner border border-slate-200/50">
-                        <i class="fa-solid ${data.icon}"></i>
-                    </div>
-                    <div>
-                        <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 bg-slate-100 px-2 py-0.5 rounded">${data.badge}</span>
-                        <h3 class="text-2xl font-bold text-slate-800 mt-1">${data.title}</h3>
-                    </div>
+            // Renderizar Conteúdo
+            document.getElementById('view-container').innerHTML = `
+                <div class="view-card">
+                    ${data.html}
                 </div>
-                ${data.content}
             `;
-            document.getElementById('modal-container').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function closeModal() {
-            document.getElementById('modal-container').classList.add('hidden');
+        function navigateTo(key) {
+            historyStack.push(key);
+            renderCurrentView();
         }
 
-        // Close modal on outside backdrop click
-        document.getElementById('modal-container').addEventListener('click', (e) => {
-            if (e.target.id === 'modal-container') closeModal();
-        });
+        function jumpToHistory(index) {
+            historyStack = historyStack.slice(0, index + 1);
+            renderCurrentView();
+        }
 
-        // Initialize App on Page Load
-        document.addEventListener('DOMContentLoaded', () => {
-            navigateTo('home');
-        });
+        // Modais Pop-up
+        function openModal(title, text) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-text').innerText = text;
+            document.getElementById('modal-overlay').classList.add('active');
+        }
+
+        function closeModalForce() {
+            document.getElementById('modal-overlay').classList.remove('active');
+        }
+
+        function closeModal(event) {
+            if (event.target === document.getElementById('modal-overlay')) {
+                closeModalForce();
+            }
+        }
+
+        // Alternar Abas Principais (Estudo vs Quiz)
+        function switchMainTab(tab) {
+            const studySec = document.getElementById('study-section');
+            const quizSec = document.getElementById('quiz-section');
+            const buttons = document.querySelectorAll('.nav-btn');
+
+            buttons.forEach(b => b.classList.remove('active'));
+
+            if (tab === 'study') {
+                studySec.style.display = 'block';
+                quizSec.style.display = 'none';
+                buttons[0].classList.add('active');
+            } else {
+                studySec.style.display = 'none';
+                quizSec.style.display = 'block';
+                buttons[1].classList.add('active');
+                renderQuiz();
+            }
+        }
+
+        // Embaralhar e Renderizar Questões de Treino
+        function renderQuiz() {
+            const quizListEl = document.getElementById('quiz-list');
+            // Embaralhar cópia das questões a cada acesso
+            const shuffled = [...quizData].sort(() => Math.random() - 0.5);
+
+            let html = '';
+            shuffled.forEach((item, idx) => {
+                html += `
+                    <div class="quiz-card">
+                        <div class="quiz-question">Questão ${idx + 1}: ${item.q}</div>
+                        <button class="btn-reveal" onclick="toggleAnswer(this)">Ver Gabarito Discursivo</button>
+                        <div class="answer-box">
+                            <strong>Gabarito / Explicação:</strong>
+                            <p style="margin-top: 0.5rem; margin-bottom: 0;">${item.a}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            quizListEl.innerHTML = html;
+        }
+
+        function toggleAnswer(btn) {
+            const answerBox = btn.nextElementSibling;
+            if (answerBox.classList.contains('revealed')) {
+                answerBox.classList.remove('revealed');
+                btn.innerText = "Ver Gabarito Discursivo";
+            } else {
+                answerBox.classList.add('revealed');
+                btn.innerText = "Ocultar Gabarito";
+            }
+        }
+
+        // Inicializar aplicação
+        renderCurrentView();
     </script>
 </body>
 </html>
